@@ -5,13 +5,13 @@ import SwiftUI
 struct BudgetFeatureAppApp: App {
     var body: some Scene {
         WindowGroup {
-            BudgetOverviewView()
+            BudgetFeatureEntry.makeRootView()
         }
     }
 }
 
 struct Budget_Previews: PreviewProvider {
     static var previews: some View {
-        BudgetOverviewView()
+        BudgetFeatureEntry.makeRootView()
     }
 }

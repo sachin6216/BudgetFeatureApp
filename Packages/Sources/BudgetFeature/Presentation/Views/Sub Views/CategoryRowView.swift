@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct CategoryRowView: View {
+    let category: BudgetCategory
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -11,7 +12,7 @@ struct CategoryRowView: View {
                     .background(.tint, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Food")
+                    Text(category.name)
                         .font(.subheadline.weight(.medium))
                         .foregroundStyle(.primary)
 
