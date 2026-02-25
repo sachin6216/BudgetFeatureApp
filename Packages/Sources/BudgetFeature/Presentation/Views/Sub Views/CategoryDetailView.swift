@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct CategoryDetailView: View {
+    let category: BudgetCategory
 
     var body: some View {
         List {
@@ -17,13 +18,13 @@ struct CategoryDetailView: View {
                 )
             }
 
-            Section("Transactions") {
-                ForEach(0..<5) { _ in
+            Section(category.name) {
+                ForEach(category.transactions) { transaction in
                     TransactionRowView()
                 }
             }
         }
-        .navigationTitle("Food")
+        .navigationTitle(category.name)
     }
 
     // MARK: - Private

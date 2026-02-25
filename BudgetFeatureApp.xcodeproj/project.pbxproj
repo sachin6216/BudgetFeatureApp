@@ -19,6 +19,7 @@
 		0425FA212F4F4D1800AE8573 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0425FA242F4F4D1800AE8573 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0425FA2C2F4F4D5800AE8573 /* Packages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Packages; sourceTree = "<group>"; };
+		0425FA302F4FA3E800AE8573 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +37,7 @@
 		0425FA112F4F4D1500AE8573 = {
 			isa = PBXGroup;
 			children = (
+				0425FA302F4FA3E800AE8573 /* README.md */,
 				0425FA2C2F4F4D5800AE8573 /* Packages */,
 				0425FA1C2F4F4D1500AE8573 /* BudgetFeatureApp */,
 				0425FA1B2F4F4D1500AE8573 /* Products */,
