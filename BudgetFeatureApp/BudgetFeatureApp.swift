@@ -2,7 +2,7 @@ import BudgetFeature
 import SwiftUI
 
 @main
-struct BudgetFeatureAppApp: App {
+struct BudgetFeatureApp: App {
     var body: some Scene {
         WindowGroup {
             BudgetFeatureEntry.makeRootView()

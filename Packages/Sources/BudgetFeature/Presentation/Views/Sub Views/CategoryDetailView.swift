@@ -27,8 +27,6 @@ struct CategoryDetailView: View {
         .navigationTitle(category.name)
     }
 
-    // MARK: - Private
-
     private func spendingRow(title: String, amount: String, tint: Color) -> some View {
         HStack {
             Text(title)

@@ -34,9 +34,7 @@ internal struct BudgetView: View {
             }
         }
     }
-    
-    // MARK: - Loaded state
-    
+        
     private func budgetList(_ budget: Budget) -> some View {
         List {
             Section {
