@@ -1,53 +1,59 @@
 import SwiftUI
 
-internal struct BudgetView: View {
-    
+struct BudgetView: View {
     @StateObject private var viewModel: BudgetViewModel
-    
-    public init(viewModel: BudgetViewModel) {
+    @ObservedObject private var navigationStack: BudgetNavigationStack
+
+    init(viewModel: BudgetViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _navigationStack = ObservedObject(wrappedValue: viewModel.navigationStack)
     }
-    
-    public var body: some View {
-        NavigationStack {
+
+    var body: some View {
+        NavigationStack(path: $navigationStack.path) {
             content
-                .navigationTitle("Monthly Budget")
+                .navigationTitle(viewModel.strings.overviewNavigationTitle)
+                .navigationDestination(for: BudgetDestination.self) { destination in
+                    viewModel.router.view(for: destination, context: viewModel.routerContext)
+                }
         }
         .task { await viewModel.load() }
     }
-    
+
     // MARK: - State switching
-    
+
     @ViewBuilder
     private var content: some View {
         switch viewModel.state {
         case .loading:
             ProgressView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
+
         case .loaded(let budget):
             budgetList(budget)
-            
-        case .error:
-            BudgetErrorView {
-                Task { await viewModel.load() }
-            }
+
+        case .error(let error):
+            BudgetErrorView(
+                model: viewModel.makeErrorModel(for: error),
+                onRetry: { Task { await viewModel.load() } }
+            )
         }
     }
-        
+
     private func budgetList(_ budget: Budget) -> some View {
         List {
             Section {
-                BudgetSummaryCardView()
+                BudgetSummaryCard(model: viewModel.makeSummaryModel(for: budget))
             }
-            
-            Section("Spending categories") {
-                ForEach(budget.categories) { category in
-                    NavigationLink {
-                        CategoryDetailView(category: category)
+
+            Section(viewModel.strings.overviewCategoriesHeader) {
+                ForEach(viewModel.makeCategoryRowModels(for: budget)) { rowModel in
+                    Button {
+                        navigationStack.push(rowModel.destination)
                     } label: {
-                        CategoryRowView(category: category)
+                        CategoryRowView(model: rowModel)
                     }
+                    .buttonStyle(.plain)
                 }
             }
         }

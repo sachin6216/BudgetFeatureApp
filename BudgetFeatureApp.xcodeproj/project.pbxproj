@@ -11,6 +11,10 @@
 		0425FA222F4F4D1800AE8573 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425FA212F4F4D1800AE8573 /* Assets.xcassets */; };
 		0425FA252F4F4D1800AE8573 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0425FA242F4F4D1800AE8573 /* Preview Assets.xcassets */; };
 		0425FA2F2F4F500000AE8573 /* BudgetFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 0425FA2E2F4F500000AE8573 /* BudgetFeature */; };
+		0425FA3B2F508AE300AE8573 /* LocalFeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425FA3A2F508AE300AE8573 /* LocalFeatureFlags.swift */; };
+		0425FA3D2F508AFA00AE8573 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425FA3C2F508AFA00AE8573 /* RootView.swift */; };
+		0425FA402F50B85200AE8573 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0425FA3F2F50B85200AE8573 /* Localizable.strings */; };
+		0425FA452F50BF8000AE8573 /* AppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0425FA442F50BF8000AE8573 /* AppDependencyContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		0425FA242F4F4D1800AE8573 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0425FA2C2F4F4D5800AE8573 /* Packages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Packages; sourceTree = "<group>"; };
 		0425FA302F4FA3E800AE8573 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0425FA3A2F508AE300AE8573 /* LocalFeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeatureFlags.swift; sourceTree = "<group>"; };
+		0425FA3C2F508AFA00AE8573 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		0425FA3F2F50B85200AE8573 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		0425FA442F50BF8000AE8573 /* AppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencyContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +64,9 @@
 		0425FA1C2F4F4D1500AE8573 /* BudgetFeatureApp */ = {
 			isa = PBXGroup;
 			children = (
-				0425FA1D2F4F4D1500AE8573 /* BudgetFeatureApp.swift */,
+				0425FA432F50BF6B00AE8573 /* Configurations */,
+				0425FA3E2F50B84800AE8573 /* Resources */,
+				0425FA462F50C26400AE8573 /* App */,
 				0425FA212F4F4D1800AE8573 /* Assets.xcassets */,
 				0425FA232F4F4D1800AE8573 /* Preview Content */,
 			);
@@ -76,6 +86,40 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0425FA392F508AD700AE8573 /* FeatureFlags */ = {
+			isa = PBXGroup;
+			children = (
+				0425FA3A2F508AE300AE8573 /* LocalFeatureFlags.swift */,
+			);
+			path = FeatureFlags;
+			sourceTree = "<group>";
+		};
+		0425FA3E2F50B84800AE8573 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0425FA3F2F50B85200AE8573 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0425FA432F50BF6B00AE8573 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				0425FA392F508AD700AE8573 /* FeatureFlags */,
+				0425FA442F50BF8000AE8573 /* AppDependencyContainer.swift */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		0425FA462F50C26400AE8573 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0425FA1D2F4F4D1500AE8573 /* BudgetFeatureApp.swift */,
+				0425FA3C2F508AFA00AE8573 /* RootView.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0425FA252F4F4D1800AE8573 /* Preview Assets.xcassets in Resources */,
+				0425FA402F50B85200AE8573 /* Localizable.strings in Resources */,
 				0425FA222F4F4D1800AE8573 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,7 +196,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0425FA3B2F508AE300AE8573 /* LocalFeatureFlags.swift in Sources */,
 				0425FA1E2F4F4D1500AE8573 /* BudgetFeatureApp.swift in Sources */,
+				0425FA452F50BF8000AE8573 /* AppDependencyContainer.swift in Sources */,
+				0425FA3D2F508AFA00AE8573 /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

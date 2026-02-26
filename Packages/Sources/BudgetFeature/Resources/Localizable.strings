@@ -1,0 +1,28 @@
+/* Overview */
+"budget.overview.title" = "Monthly Budget";
+"budget.overview.categories_header" = "Spending categories";
+"budget.overview.summary_spent" = "Spent";
+"budget.overview.summary_of" = "of";
+"budget.overview.remaining" = "remaining";
+
+/* Category row */
+"budget.category.of" = "of";
+
+/* Category detail */
+"budget.detail.spent" = "Spent";
+"budget.detail.remaining" = "Remaining";
+"budget.detail.progress_header" = "Budget used";
+"budget.detail.transactions_header" = "Transactions";
+"budget.detail.no_transactions" = "No transactions this month.";
+
+/* Errors */
+"budget.error.network.title" = "No internet connection";
+"budget.error.network.message" = "Check your connection and try again.";
+"budget.error.empty.title" = "Nothing to show";
+"budget.error.empty.message" = "Your budget data is empty. Pull to refresh or contact support.";
+"budget.error.generic.title" = "Something went wrong";
+"budget.error.generic.message" = "We couldn't load your budget. Please try again.";
+"budget.error.retry" = "Try again";
+
+/* Feature disabled */
+"budget.feature_disabled" = "This feature is not available yet.";
