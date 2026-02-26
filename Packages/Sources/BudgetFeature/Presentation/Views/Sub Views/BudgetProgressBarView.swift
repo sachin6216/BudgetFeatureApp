@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct BudgetProgressBar: View {
-
     let progress: Double
 
     var body: some View {

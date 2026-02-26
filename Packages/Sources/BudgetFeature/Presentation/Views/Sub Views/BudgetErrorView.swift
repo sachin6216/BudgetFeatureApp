@@ -1,30 +1,30 @@
 import SwiftUI
 
 struct BudgetErrorView: View {
-
+    let model: BudgetErrorModel
     let onRetry: () -> Void
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: BudgetStyle.Spacing.xxl) {
             Image(systemName: "exclamationmark.triangle.fill")
-                .font(.system(size: 44))
+                .font(.system(size: BudgetStyle.Size.errorIconSize))
                 .foregroundStyle(.orange)
 
-            VStack(spacing: 6) {
-                Text("Couldn't load budget")
-                    .font(.headline)
+            VStack(spacing: BudgetStyle.Spacing.sm) {
+                Text(model.title)
+                    .font(BudgetStyle.Font.errorTitle)
 
-                Text("Check your connection and try again.")
-                    .font(.subheadline)
+                Text(model.message)
+                    .font(BudgetStyle.Font.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }
 
-            Button("Try again", action: onRetry)
+            Button(model.retryLabel, action: onRetry)
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
         }
-        .padding(32)
+        .padding(BudgetStyle.Spacing.xxxl)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

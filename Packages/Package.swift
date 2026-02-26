@@ -12,7 +12,8 @@ let package = Package(
         .library(name: "BudgetFeature", targets: ["BudgetFeature"]),
     ],
     targets: [
-        .target(name: "BudgetFeature"),
+        .target(name: "BudgetFeature",
+                resources: [.process("Resources/Localizable.strings")]),
         .testTarget(name: "BudgetFeatureTests",dependencies: ["BudgetFeature"]),
     ]
 )

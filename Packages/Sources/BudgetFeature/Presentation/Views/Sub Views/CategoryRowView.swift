@@ -1,29 +1,45 @@
 import SwiftUI
 
 struct CategoryRowView: View {
-    let category: BudgetCategory
+    let model: CategoryRowModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 10) {
-                Image(systemName: "fork.knife")
-                    .frame(width: 28, height: 28)
+        VStack(alignment: .leading, spacing: BudgetStyle.Spacing.md) {
+            HStack(spacing: BudgetStyle.Spacing.lg - 2) {
+                Image(systemName: model.icon)
+                    .frame(
+                        width: BudgetStyle.Size.categoryIconFrame,
+                        height: BudgetStyle.Size.categoryIconFrame
+                    )
                     .foregroundStyle(.white)
-                    .background(.tint, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+                    .background(
+                        .tint,
+                        in: RoundedRectangle(
+                            cornerRadius: BudgetStyle.Shape.categoryIconCornerRadius,
+                            style: .continuous
+                        )
+                    )
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(category.name)
-                        .font(.subheadline.weight(.medium))
+                VStack(alignment: .leading, spacing: BudgetStyle.Spacing.xxs) {
+                    Text(model.name)
+                        .font(BudgetStyle.Font.subheadlineMedium)
                         .foregroundStyle(.primary)
 
-                    Text("$200 of $400")
-                        .font(.caption)
+                    Text("\(model.spentLabel) \(model.ofLabel) \(model.totalLabel)")
+                        .font(BudgetStyle.Font.caption)
                         .foregroundStyle(.secondary)
                 }
-            }
 
-            BudgetProgressBar(progress: 0.4)
+                Spacer()
+
+                Text(model.amountLabel)
+                    .font(BudgetStyle.Font.subheadlineSemibold)
+            }
+            .accessibilityHidden(true)
+
+            BudgetProgressBar(progress: model.progress)
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, BudgetStyle.Spacing.xs)
+        .accessibilityLabel(Text("define"))
     }
 }

@@ -4,8 +4,6 @@ public protocol LoadBudgetUseCaseProtocol {
     func execute() async throws -> Budget
 }
 
-// MARK: - Concrete implementation
-
 public struct LoadBudgetUseCase: LoadBudgetUseCaseProtocol {
 
     private let repository: BudgetRepository

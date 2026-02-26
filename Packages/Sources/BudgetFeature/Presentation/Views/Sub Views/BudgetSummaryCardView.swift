@@ -1,15 +1,22 @@
 import SwiftUI
 
-struct BudgetSummaryCardView: View {
+struct BudgetSummaryCard: View {
+    let model: BudgetSummaryModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Spent $200 of $800")
-                .font(.title3.weight(.semibold))
-                .foregroundStyle(.primary)
+        VStack(alignment: .leading, spacing: BudgetStyle.Spacing.lg) {
+            Text(
+                "\(model.summarySpentPrefix) \(model.spentLabel) \(model.summaryOfWord) \(model.totalLabel)"
+            )
+            .font(BudgetStyle.Font.summaryTitle)
+            .foregroundStyle(.primary)
 
-            BudgetProgressBar(progress: 0.3)
+            BudgetProgressBar(progress: model.progress)
+
+            Text("\(model.remainingLabel) \(model.remainingSuffix)")
+                .font(BudgetStyle.Font.subheadline)
+                .foregroundStyle(.secondary)
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, BudgetStyle.Spacing.xs)
     }
 }
