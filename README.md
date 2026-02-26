@@ -30,16 +30,20 @@ The app never reaches into `BudgetFeature` internals. The contract is `BudgetCon
 
 ## Feature flags
 
-Flags are read from `FeatureFlags.plist` in the main bundle. Add a Boolean key `isBudgetEnabled` to control whether the budget screen is shown. If the plist is missing the flag defaults to `true`, so the feature is always visible in debug builds.
+Feature flags are provided through the FeatureFlagProviding protocol and injected via AppDependencyContainer.
+The default implementation uses LocalFeatureFlags, which allows you to configure flags directly in code:
+public protocol FeatureFlagProviding {
+    var isBudgetEnabled: Bool { get }
+}
 
-To test with the feature disabled, either set the plist key to `NO` or use `StubFeatureFlagProvider` in a preview:
+```
+public struct LocalFeatureFlags: FeatureFlagProviding {
+    public let isBudgetEnabled: Bool
 
-```swift
-RootView(
-    container: AppDependencyContainer(
-        featureFlagProvider: StubFeatureFlagProvider(isBudgetEnabled: false)
-    )
-)
+    public init(isBudgetEnabled: Bool) {
+        self.isBudgetEnabled = isBudgetEnabled
+    }
+}
 ```
 
 ## Requirements
