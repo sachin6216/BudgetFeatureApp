@@ -5,7 +5,6 @@ public struct BudgetSummaryModel: Equatable {
     public let totalLabel: String
     public let remainingLabel: String
     public let progress: Double
-
     public let summarySpentPrefix: String
     public let summaryOfWord: String
     public let remainingSuffix: String
@@ -47,8 +46,8 @@ public struct TransactionRowModel: Identifiable {
     public let amountLabel: String
 }
 
-public struct BudgetErrorModel {
-    public let title: String
-    public let message: String
-    public let retryLabel: String
+struct BudgetErrorModel {
+    let title: String
+    let message: String
+    let retryLabel: String
 }

@@ -34,12 +34,18 @@ struct CategoryRowView: View {
 
                 Text(model.amountLabel)
                     .font(BudgetStyle.Font.subheadlineSemibold)
+                
+                Image(systemName: "chevron.forward")
+                    .frame(
+                        width: BudgetStyle.Size.categoryIconForward,
+                        height: BudgetStyle.Size.categoryIconForward
+                    )
             }
             .accessibilityHidden(true)
 
             BudgetProgressBar(progress: model.progress)
         }
         .padding(.vertical, BudgetStyle.Spacing.xs)
-        .accessibilityLabel(Text("define"))
+        .accessibilityLabel(Text("\(model.name) \(model.spentLabel) \(model.ofLabel) \(model.totalLabel)"))
     }
 }

@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 @MainActor
-public final class BudgetViewModel: ObservableObject {
+final class BudgetViewModel: ObservableObject {
     @Published public private(set) var state: BudgetViewState = .loading
 
     let routerContext: BudgetRouterContext
@@ -31,7 +31,7 @@ public final class BudgetViewModel: ObservableObject {
         )
     }
 
-    public func load() async {
+    func load() async {
         state = .loading
         do {
             let budget = try await useCase.execute()
@@ -94,6 +94,7 @@ public final class BudgetViewModel: ObservableObject {
             )
         }
     }
+
     private func format(_ value: Decimal) -> String {
         currencyFormatter.format(value)
     }

@@ -32,6 +32,7 @@ enum BudgetStyle {
     
     enum Size {
         static let categoryIconFrame: CGFloat = 28
+        static let categoryIconForward: CGFloat = 22
         static let errorIconSize: CGFloat = 44
         static let featureDisabledIconSize: CGFloat = 36
     }
