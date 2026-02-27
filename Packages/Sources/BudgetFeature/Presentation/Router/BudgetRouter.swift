@@ -41,7 +41,6 @@ public struct BudgetRouterContext {
     }
 }
 
-
 public struct DefaultBudgetRouter: BudgetRouter {
     public init() {}
 

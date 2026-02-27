@@ -20,7 +20,6 @@ final class AppDependencyContainer {
         )
     }
 
-
     var isBudgetEnabled: Bool {
         featureFlagProvider.isBudgetEnabled
     }

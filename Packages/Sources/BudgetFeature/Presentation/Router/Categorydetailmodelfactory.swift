@@ -25,8 +25,6 @@ struct CategoryDetailModelFactory {
         )
     }
 
-    // MARK: - Private
-
     private func makeTransactionRow(for transaction: Transaction) -> TransactionRowModel {
         TransactionRowModel(
             id: transaction.id,

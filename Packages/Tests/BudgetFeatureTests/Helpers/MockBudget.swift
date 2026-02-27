@@ -31,8 +31,8 @@ enum MockBudget {
         total: 400,
         spent: 200,
         transactions: [
-            Transaction(id: "f1", title: "Test Grocery Store", amount: 30,  date: Date()),
-            Transaction(id: "f2", title: "Test Restaurant",    amount: 45,  date: Date())
+            Transaction(id: "f1", title: "Test Grocery Store", amount: 30, trancDate: "2026-02-23T14:30:00Z"),
+            Transaction(id: "f2", title: "Test Restaurant", amount: 45, trancDate: "2026-02-23T14:30:00Z")
         ]
     )
 }

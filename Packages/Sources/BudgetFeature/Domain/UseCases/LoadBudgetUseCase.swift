@@ -4,15 +4,14 @@ public protocol LoadBudgetUseCaseProtocol {
     func execute() async throws -> Budget
 }
 
-public struct LoadBudgetUseCase: LoadBudgetUseCaseProtocol {
-
+struct LoadBudgetUseCase: LoadBudgetUseCaseProtocol {
     private let repository: BudgetRepository
 
-    public init(repository: BudgetRepository) {
+    init(repository: BudgetRepository) {
         self.repository = repository
     }
 
-    public func execute() async throws -> Budget {
+    func execute() async throws -> Budget {
         let budget = try await repository.fetchBudget()
         guard !budget.categories.isEmpty else {
             throw BudgetError.emptyResponse

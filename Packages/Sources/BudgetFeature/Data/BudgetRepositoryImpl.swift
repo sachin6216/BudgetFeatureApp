@@ -1,12 +1,12 @@
 import Foundation
 
-public final class BudgetRepositoryImpl: BudgetRepository {
-    public init() {}
+final class BudgetRepositoryImpl: BudgetRepository {
+    init() {}
 
-    public func fetchBudget() async throws -> Budget {
+    func fetchBudget() async throws -> Budget {
         try await Task.sleep(for: .seconds(1))
         let shouldFail = false
-        if shouldFail { throw BudgetError.networkUnavailable }
+        if shouldFail { throw BudgetError.emptyResponse }
         
         return .stub
     }
@@ -26,11 +26,11 @@ private extension Budget {
                 total: 400,
                 spent: 310,
                 transactions: [
-                    Transaction(id: "f1", title: "Rimi Supermarket", amount: 62.40, date: .daysAgo(1)),
-                    Transaction(id: "f2", title: "Hesburger", amount: 11.90, date: .daysAgo(3)),
-                    Transaction(id: "f3", title: "Coffee Inn", amount: 4.20,  date: .daysAgo(4)),
-                    Transaction(id: "f4", title: "Maxima", amount: 48.70, date: .daysAgo(6)),
-                    Transaction(id: "f5", title: "Double Coffee", amount: 8.50,  date: .daysAgo(8))
+                    Transaction(id: "f1", title: "Rimi Supermarket", amount: 62.40, trancDate: "2026-02-23T14:30:00Z"),
+                    Transaction(id: "f2", title: "Hesburger", amount: 11.90, trancDate: "2026-02-23T14:30:00Z"),
+                    Transaction(id: "f3", title: "Coffee Inn", amount: 4.20,  trancDate: "2026-02-24T14:30:00Z"),
+                    Transaction(id: "f4", title: "Maxima", amount: 48.70, trancDate: "2026-02-24T14:30:00Z"),
+                    Transaction(id: "f5", title: "Double Coffee", amount: 8.50,  trancDate: "2026-02-23T14:30:00Z")
                 ]
             ),
             BudgetCategory(
@@ -40,10 +40,10 @@ private extension Budget {
                 total: 200,
                 spent: 94,
                 transactions: [
-                    Transaction(id: "tr1", title: "Bolt ride", amount: 7.80,  date: .daysAgo(2)),
-                    Transaction(id: "tr2", title: "Riga public transit",amount: 30.00, date: .daysAgo(5)),
-                    Transaction(id: "tr3", title: "Bolt ride", amount: 9.20,  date: .daysAgo(9)),
-                    Transaction(id: "tr4", title: "CityBee", amount: 14.50, date: .daysAgo(12))
+                    Transaction(id: "tr1", title: "Bolt ride", amount: 7.80,  trancDate: "2026-02-25T14:30:00Z"),
+                    Transaction(id: "tr2", title: "Riga public transit",amount: 30.00, trancDate: "2026-02-24T14:30:00Z"),
+                    Transaction(id: "tr3", title: "Bolt ride", amount: 9.20,  trancDate: "2026-02-26T14:30:00Z"),
+                    Transaction(id: "tr4", title: "CityBee", amount: 14.50, trancDate: "2026-02-26T14:30:00Z")
                 ]
             ),
             BudgetCategory(
@@ -53,10 +53,10 @@ private extension Budget {
                 total: 300,
                 spent: 286,
                 transactions: [
-                    Transaction(id: "s1", title: "Zara", amount: 79.99, date: .daysAgo(3)),
-                    Transaction(id: "s2", title: "Euronics", amount: 129.00, date: .daysAgo(7)),
-                    Transaction(id: "s3", title: "Drogas", amount: 23.45, date: .daysAgo(10)),
-                    Transaction(id: "s4", title: "H&M", amount: 54.00, date: .daysAgo(14))
+                    Transaction(id: "s1", title: "Zara", amount: 79.99, trancDate: "2026-02-24T14:30:00Z"),
+                    Transaction(id: "s2", title: "Euronics", amount: 129.00, trancDate: "2026-02-25T14:30:00Z"),
+                    Transaction(id: "s3", title: "Drogas", amount: 23.45, trancDate: "2026-02-24T14:30:00Z"),
+                    Transaction(id: "s4", title: "H&M", amount: 54.00, trancDate: "2026-02-25T14:30:00Z")
                 ]
             ),
             BudgetCategory(
@@ -66,10 +66,10 @@ private extension Budget {
                 total: 150,
                 spent: 110,
                 transactions: [
-                    Transaction(id: "e1", title: "Spotify", amount: 9.99,  date: .daysAgo(1)),
-                    Transaction(id: "e2", title: "Forum Cinemas", amount: 24.00, date: .daysAgo(8)),
-                    Transaction(id: "e3", title: "Steam", amount: 19.99, date: .daysAgo(11)),
-                    Transaction(id: "e4", title: "Netflix", amount: 15.99, date: .daysAgo(15))
+                    Transaction(id: "e1", title: "Spotify", amount: 9.99,  trancDate: "2026-02-25T14:30:00Z"),
+                    Transaction(id: "e2", title: "Forum Cinemas", amount: 24.00, trancDate: "2026-02-23T14:30:00Z"),
+                    Transaction(id: "e3", title: "Steam", amount: 19.99, trancDate: "2026-02-26T14:30:00Z"),
+                    Transaction(id: "e4", title: "Netflix", amount: 15.99, trancDate: "2026-02-27T14:30:00Z")
                 ]
             ),
             BudgetCategory(
@@ -79,17 +79,19 @@ private extension Budget {
                 total: 100,
                 spent: 70,
                 transactions: [
-                    Transaction(id: "h1", title: "Euroaptieka", amount: 22.60, date: .daysAgo(4)),
-                    Transaction(id: "h2", title: "Sports club", amount: 35.00, date: .daysAgo(9)),
-                    Transaction(id: "h3", title: "Doc+", amount: 12.00, date: .daysAgo(13))
+                    Transaction(id: "h1", title: "Euroaptieka", amount: 22.60, trancDate: "2026-02-25T14:30:00Z"),
+                    Transaction(id: "h2", title: "Sports club", amount: 35.00, trancDate: "2026-02-26T14:30:00Z"),
+                    Transaction(id: "h3", title: "Doc+", amount: 12.00, trancDate: "2026-02-26T14:30:00Z")
                 ]
+            ),
+            BudgetCategory(
+                id: "other",
+                name: "Other",
+                icon: "cloud.fill",
+                total: 200,
+                spent: 10,
+                transactions: []
             )
         ]
     )
-}
-
-private extension Date {
-    static func daysAgo(_ days: Int) -> Date {
-        Calendar.current.date(byAdding: .day, value: -days, to: Date()) ?? Date()
-    }
 }

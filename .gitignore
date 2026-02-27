@@ -1,0 +1,52 @@
+# ================================
+# Xcode
+# ================================
+
+## Build
+build/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## User settings
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+
+## Workspace user data
+*.xcworkspace/xcuserdata/
+
+## Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# If using Xcode-managed SPM, KEEP Package.resolved in app projects
+# Remove the above line if you want to commit it.
+
+
+# ================================
+# Archives
+# ================================
+
+*.xcarchive
+
+# ================================
+# Logs
+# ================================
+
+*.log
+
+# ================================
+# macOS
+# ================================
+
+.DS_Store
+
+# ================================
+# Temporary Files
+# ================================
+
+*.swp
+*.tmp

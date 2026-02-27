@@ -10,13 +10,13 @@ struct CategoryDetailView: View {
                     BudgetProgressBar(progress: model.progress)
 
                     HStack {
-                        spendingChip(
+                        spendingRow(
                             title: model.spentLabel,
                             amount: model.spentAmount,
                             tint: .red
                         )
                         Spacer()
-                        spendingChip(
+                        spendingRow(
                             title: model.remainingLabel,
                             amount: model.remainingAmount,
                             tint: .green
@@ -39,11 +39,9 @@ struct CategoryDetailView: View {
             }
         }
         .navigationTitle(model.name)
-        .navigationBarTitleDisplayMode(.large)
-        .listStyle(.insetGrouped)
     }
 
-    private func spendingChip(title: String, amount: String, tint: Color) -> some View {
+    private func spendingRow(title: String, amount: String, tint: Color) -> some View {
         VStack(alignment: .leading, spacing: BudgetStyle.Spacing.xxs) {
             Text(title)
                 .font(BudgetStyle.Font.subheadline)

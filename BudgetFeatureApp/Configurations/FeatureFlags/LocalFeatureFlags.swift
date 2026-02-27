@@ -1,13 +1,13 @@
 import Foundation
 
-public protocol FeatureFlagProviding {
+protocol FeatureFlagProviding {
     var isBudgetEnabled: Bool { get }
 }
 
-public struct LocalFeatureFlags: FeatureFlagProviding {
-    public let isBudgetEnabled: Bool
+struct LocalFeatureFlags: FeatureFlagProviding {
+    let isBudgetEnabled: Bool
 
-    public init(isBudgetEnabled: Bool) {
+    init(isBudgetEnabled: Bool) {
         self.isBudgetEnabled = isBudgetEnabled
     }
 }

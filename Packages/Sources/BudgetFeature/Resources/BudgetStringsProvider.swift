@@ -2,8 +2,10 @@ import Foundation
 
 public struct BudgetStringsProvider {
 
+    public init() {}
+
     // Overview
-    /// "budget.overview.title" = "Monthly Budget"
+    /// "budget.overview.title" = "This Month"
     public var overviewNavigationTitle: String = "budget.overview.title".localized()
     
     /// "budget.overview.categories_header" = "Categories"
@@ -59,10 +61,4 @@ public struct BudgetStringsProvider {
     
     /// "budget.error.retry" = "Retry"
     public var errorRetryButton: String = "budget.error.retry".localized()
-    
-    // Feature disabled
-    /// "budget.feature_disabled" = "This feature is currently disabled."
-    public var featureDisabledMessage: String = "budget.feature_disabled".localized()
-    
-    public init() {}
 }

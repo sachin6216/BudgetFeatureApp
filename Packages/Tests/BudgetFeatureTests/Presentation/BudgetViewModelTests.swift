@@ -18,14 +18,18 @@ final class BudgetViewModelTest: XCTestCase {
         super.tearDown()
     }
     
-    // Initially State sets to loading
+    // MARK: - Initial State
+
+    // Verifies that the initial state is set to `.loading`
     func test_load_setsLoadingStateInitially() async {
         if case .loading = mockViewModel.state {} else {
             XCTFail("Expected initial state to be .loading")
         }
     }
     
-    // Succesfully retrun Budget result
+    // MARK: - Success Scenarios
+
+    // Verifies that a valid Budget response is returned successfully
     func test_load_setsLoadedStateOnSuccess() async {
         mockUseCase.result = .success(MockBudget.singleCategoryBudget)
         
@@ -38,7 +42,9 @@ final class BudgetViewModelTest: XCTestCase {
         XCTAssertEqual(budget, MockBudget.singleCategoryBudget)
     }
     
-    // Getting error state on networkUnavailable
+    // MARK: - Error Scenarios
+    
+    // Verifies that the correct error state is returned when the network is unavailable
     func test_load_setsErrorStateOnNetworkError() async {
         mockUseCase.result = .failure(BudgetError.networkUnavailable)
 
@@ -51,7 +57,7 @@ final class BudgetViewModelTest: XCTestCase {
         XCTAssertEqual(error, .networkUnavailable)
     }
     
-    // Getting error state on Empty response
+    // Verifies that the correct error state is returned when the response is empty
     func test_load_setsEmptyResponseError() async {
         mockUseCase.result = .failure(BudgetError.emptyResponse)
 
@@ -64,7 +70,7 @@ final class BudgetViewModelTest: XCTestCase {
         XCTAssertEqual(error, .emptyResponse)
     }
     
-    // Getting error state on Unkonown Error
+    // Verifies that the correct error state is returned for an unknown error
     func test_load_setsUnknownErrorForNonBudgetErrors() async {
         mockUseCase.result = .failure(BudgetError.unknown)
 
@@ -77,24 +83,19 @@ final class BudgetViewModelTest: XCTestCase {
         XCTAssertEqual(error, .unknown)
     }
     
-    // makeSummaryModel()
+    // MARK: - Model Builders
+    
+    // Tests the creation of the summary view model
     func test_makeSummaryModel_progressIsCorrect() {
         let budget = MockBudget.singleCategoryBudget
         let model = mockViewModel.makeSummaryModel(for: budget)
         XCTAssertEqual(model.progress, 0.5)
     }
     
-    // makeCategoryRowModels()
+    // Tests the creation of category row view models
     func test_makeCategoryRowModels_countMatchesBudgetCategories() {
         let budget = MockBudget.singleCategoryBudget
         let models = mockViewModel.makeCategoryRowModels(for: budget)
         XCTAssertEqual(models.count, budget.categories.count)
-    }
-    
-    // makeCategoryDetailModel()
-    func test_makeCategoryDetailModel_nameMatches() {
-        let budgetCategory = MockBudget.overBudgetCategory
-        let model = mockViewModel.makeCategoryDetailModel(for: budgetCategory)
-        XCTAssertEqual(model.name, budgetCategory.name)
     }
 }

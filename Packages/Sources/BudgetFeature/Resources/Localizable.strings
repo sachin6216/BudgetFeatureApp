@@ -1,5 +1,5 @@
 /* Overview */
-"budget.overview.title" = "Monthly Budget";
+"budget.overview.title" = "This Month";
 "budget.overview.categories_header" = "Spending categories";
 "budget.overview.summary_spent" = "Spent";
 "budget.overview.summary_of" = "of";
@@ -19,10 +19,7 @@
 "budget.error.network.title" = "No internet connection";
 "budget.error.network.message" = "Check your connection and try again.";
 "budget.error.empty.title" = "Nothing to show";
-"budget.error.empty.message" = "Your budget data is empty. Pull to refresh or contact support.";
+"budget.error.empty.message" = "Your budget data is empty. Try again or contact support.";
 "budget.error.generic.title" = "Something went wrong";
 "budget.error.generic.message" = "We couldn't load your budget. Please try again.";
 "budget.error.retry" = "Try again";
-
-/* Feature disabled */
-"budget.feature_disabled" = "This feature is not available yet.";
