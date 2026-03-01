@@ -36,3 +36,5 @@ enum MockBudget {
         ]
     )
 }
+
+struct MockError: Error {}

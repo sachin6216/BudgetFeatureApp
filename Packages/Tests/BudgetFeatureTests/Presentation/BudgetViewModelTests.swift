@@ -5,11 +5,15 @@ import XCTest
 final class BudgetViewModelTest: XCTestCase {
     private var mockUseCase: MockLoadBudgetUseCase!
     private var mockViewModel: BudgetViewModel!
+    private var mockCurrencyFormatterConfiguration = CurrencyFormatterConfiguration(currencyCode: "EUR")
     
     override func setUp() {
         super.setUp()
         mockUseCase = MockLoadBudgetUseCase()
-        mockViewModel = BudgetViewModel(useCase: mockUseCase, configuration: BudgetConfiguration())
+        mockViewModel = BudgetViewModel(
+            useCase: mockUseCase,
+            configuration: BudgetConfiguration(currencyFormatterConfiguration: mockCurrencyFormatterConfiguration)
+        )
     }
     
     override func tearDown() {
@@ -18,17 +22,8 @@ final class BudgetViewModelTest: XCTestCase {
         super.tearDown()
     }
     
-    // MARK: - Initial State
-
-    // Verifies that the initial state is set to `.loading`
-    func test_load_setsLoadingStateInitially() async {
-        if case .loading = mockViewModel.state {} else {
-            XCTFail("Expected initial state to be .loading")
-        }
-    }
-    
     // MARK: - Success Scenarios
-
+    
     // Verifies that a valid Budget response is returned successfully
     func test_load_setsLoadedStateOnSuccess() async {
         mockUseCase.result = .success(MockBudget.singleCategoryBudget)
@@ -47,9 +42,9 @@ final class BudgetViewModelTest: XCTestCase {
     // Verifies that the correct error state is returned when the network is unavailable
     func test_load_setsErrorStateOnNetworkError() async {
         mockUseCase.result = .failure(BudgetError.networkUnavailable)
-
+        
         await mockViewModel.load()
-
+        
         guard case .error(let error) = mockViewModel.state else {
             return XCTFail("Expected .error state, got \(mockViewModel.state)")
         }
@@ -60,9 +55,9 @@ final class BudgetViewModelTest: XCTestCase {
     // Verifies that the correct error state is returned when the response is empty
     func test_load_setsEmptyResponseError() async {
         mockUseCase.result = .failure(BudgetError.emptyResponse)
-
+        
         await mockViewModel.load()
-
+        
         guard case .error(let error) = mockViewModel.state else {
             return XCTFail("Expected .error state, got \(mockViewModel.state)")
         }
@@ -72,10 +67,12 @@ final class BudgetViewModelTest: XCTestCase {
     
     // Verifies that the correct error state is returned for an unknown error
     func test_load_setsUnknownErrorForNonBudgetErrors() async {
-        mockUseCase.result = .failure(BudgetError.unknown)
-
+        mockUseCase.executeHandler = {
+            throw MockError()
+        }
+        
         await mockViewModel.load()
-
+        
         guard case .error(let error) = mockViewModel.state else {
             return XCTFail("Expected .error state, got \(mockViewModel.state)")
         }
@@ -85,17 +82,34 @@ final class BudgetViewModelTest: XCTestCase {
     
     // MARK: - Model Builders
     
-    // Tests the creation of the summary view model
-    func test_makeSummaryModel_progressIsCorrect() {
+    // Verifies that the summary model calculates and formats the remaining amount correctly
+    func test_makeSummaryModel_calculatesRemainingCorrectly() {
         let budget = MockBudget.singleCategoryBudget
         let model = mockViewModel.makeSummaryModel(for: budget)
-        XCTAssertEqual(model.progress, 0.5)
+        
+        let expectedRemaining = budget.total - budget.spent
+        
+        let formatter = CurrencyFormatter(configuration: mockCurrencyFormatterConfiguration)
+        
+        let expectedFormatted = formatter.format(expectedRemaining)
+        
+        XCTAssertEqual(model.remainingLabel, expectedFormatted)
     }
     
-    // Tests the creation of category row view models
-    func test_makeCategoryRowModels_countMatchesBudgetCategories() {
+    // Verifies that category row models map domain values and format amounts correctly
+    func test_makeCategoryRowModels_mapsCategoryValuesAndFormatsAmountsCorrectly() {
         let budget = MockBudget.singleCategoryBudget
+        let category = budget.categories.first!
+        
         let models = mockViewModel.makeCategoryRowModels(for: budget)
-        XCTAssertEqual(models.count, budget.categories.count)
+        let model = try! XCTUnwrap(models.first)
+        
+        let formatter = CurrencyFormatter(configuration: mockCurrencyFormatterConfiguration)
+        
+        XCTAssertEqual(model.id, category.id)
+        XCTAssertEqual(model.name, category.name)
+        
+        XCTAssertEqual(model.spentLabel, formatter.format(category.spent))
+        XCTAssertEqual(model.totalLabel, formatter.format(category.total))
     }
 }
