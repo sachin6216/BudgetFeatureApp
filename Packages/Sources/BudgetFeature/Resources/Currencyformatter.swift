@@ -1,6 +1,10 @@
 import Foundation
 
-struct CurrencyFormatter {
+protocol CurrencyFormatting {
+    func format(_ value: Decimal) -> String
+}
+
+struct CurrencyFormatter: CurrencyFormatting {
     private let formatter: NumberFormatter
     private let currencyCode: String
 
